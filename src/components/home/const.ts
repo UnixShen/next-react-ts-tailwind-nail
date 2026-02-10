@@ -3,27 +3,27 @@ import { ADD_TYPE_VALUE } from "./types";
 export const ShowData = [
     {
         title: "今日业绩",
-        amount: "¥320",
+        amount: "¥0",
     },
     {
         title: "本月总业绩",
-        amount: "¥320",
+        amount: "¥0",
     },
     {
         title: "今日提成",
-        amount: "¥320",
+        amount: "¥0",
     },
     {
         title: "本月提成",
-        amount: "¥320",
+        amount: "¥0",
     },
     {
         title: "今日支出",
-        amount: "¥320",
+        amount: "¥0",
     },
     {
         title: "本月总支出",
-        amount: "¥320",
+        amount: "¥0",
     },
 ];
 

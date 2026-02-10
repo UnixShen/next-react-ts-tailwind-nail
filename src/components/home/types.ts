@@ -19,3 +19,11 @@ export enum ADD_TYPE_VALUE {
     ADD_EXPENSE = "expense",
     ADD_INSIGHT = "insight",
 }
+
+export interface AddFormValues {
+    type: ADD_TYPE_VALUE;
+    amount: number;
+    date: string;
+    content?: string;
+    id?: number;
+}

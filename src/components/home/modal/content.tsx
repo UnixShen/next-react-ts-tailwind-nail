@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from 'react'
 import dayjs from "dayjs";
 import { Form, Input, Button, DatePicker, TextArea, Dialog, Radio, Space } from "antd-mobile";
-import { ADD_TYPE_VALUE } from "../types";
+import { ADD_TYPE_VALUE, AddFormValues } from "../types";
 import { AddTypeOptions } from "../const";
 import { DatePickerRef } from "antd-mobile/es/components/date-picker";
 
@@ -14,21 +14,19 @@ export const ModalContent = ({
     setShowModal: (showModal: boolean) => void;
     addType: ADD_TYPE_VALUE;
 }) => {
-    const [form] = Form.useForm()
-    const typeValue = Form.useWatch('type', form);
-    console.log("🚀 ~ ModalContent ~ typeValue:", typeValue)
+    const [form] = Form.useForm<AddFormValues>()
 
     const onSubmit = () => {
         const values = form.getFieldsValue()
-        console.log("🚀 ~ ModalContent ~ values:", values)
+        console.log("🚀 ~ onSubmit ~ values:", values)
     }
     const onClose = () => {
         setShowModal(false)
-        form.resetFields()
+        form.resetFields();
     }
 
     useEffect(() => {
-        form.setFieldsValue({ type: addType });
+        form.setFieldValue('type', addType);
     }, [addType, form]);
 
     return (
@@ -36,6 +34,7 @@ export const ModalContent = ({
             <Form
                 initialValues={{ type: addType }}
                 form={form}
+                onFinish={onSubmit}
                 layout="vertical"
                 className="space-y-4 text-sm"
                 footer={
@@ -43,7 +42,7 @@ export const ModalContent = ({
                         <Button size="small" block className="rounded-lg bg-gray-200 text-gray-700" onClick={onClose}>
                             取消
                         </Button>
-                        <Button size="small" block type="submit" color="primary" className="rounded-lg bg-pink-400 text-white" onClick={onSubmit}>
+                        <Button size="small" block type="submit" color="primary" className="rounded-lg bg-pink-400 text-white">
                             保存
                         </Button>
                     </div>
@@ -54,7 +53,7 @@ export const ModalContent = ({
                         <Space direction='horizontal'>
                             {
                                 AddTypeOptions.map(item => (
-                                    <Radio key={item.value} value={item.value} style={{
+                                    <Radio key={item.value} disabled={item.value !== addType} value={item.value} style={{
                                         '--icon-size': '18px',
                                         '--font-size': '14px',
                                         '--gap': '6px',
@@ -65,7 +64,7 @@ export const ModalContent = ({
                     </Radio.Group>
                 </Form.Item>
                 {
-                    typeValue === ADD_TYPE_VALUE.ADD_INSIGHT ?
+                    addType === ADD_TYPE_VALUE.ADD_INSIGHT ?
                         <Form.Item name='insight' label={<span className="text-gray-600">美甲小技巧</span>} required>
                             <TextArea
                                 placeholder='请输入心得小技巧'
@@ -79,17 +78,23 @@ export const ModalContent = ({
                             <Form.Item name="date" label={<span className="text-gray-600">日期</span>} trigger='onConfirm'
                                 getValueProps={value => ({ value: value ? new Date(value) : value })}
                                 normalize={value => (value ? dayjs(value).format('YYYY-MM-DD') : value)}
-                                onClick={(_, ref: RefObject<DatePickerRef>) => ref.current?.open()} required>
+                                onClick={(_, ref: RefObject<DatePickerRef>) => ref.current?.open()} rules={[{ required: true, message: '请选择日期' }]}>
                                 <DatePicker>
                                     {value => (value ? dayjs(value).format('YYYY-MM-DD') : '请选择日期')}
                                 </DatePicker>
                             </Form.Item>
                             <Form.Item name="amount" label={<span className="text-gray-600">金额</span>}
                                 rules={[{ required: true, message: '请输入金额' }]}
-                                normalize={value => (value ? Number(value) : value)}
+                                normalize={(value) => {
+                                    const regex = /^\d*\.?\d{0,2}$/;
+                                    if (!regex.test(value)) {
+                                        return value ? value.slice(0, -1) : value;
+                                    }
+                                    return value ? Number(value) : value;
+                                }}
                                 required
                             >
-                                <Input placeholder="请输入金额" type="number" className="rounded-lg bg-gray-50 p-3" />
+                                <Input placeholder="请输入金额" type="number" className="rounded-lg bg-gray-50 p-3" pattern="^\d+(\.\d{1,2})?$" />
                             </Form.Item>
                         </>
                 }
