@@ -5,24 +5,22 @@ import clientPromise from "@/lib/mongodb";
 import {DB_NAME} from "@/config/consts";
 
 export const GET = withApiHandler(async (request: NextRequest) => {
-  const type = request.nextUrl.searchParams.get("type");
-  if (!type) {
-    return Response.json(error("type is required"), {
-      status: 400,
-    })
-  }
-
+  const type =  request.nextUrl.searchParams?.get("type");
   const client = await clientPromise;
   const db = client.db(DB_NAME);
   const collection = db.collection('nail_collection');
-  const result = await collection.find({ type }).toArray();
+  const params = type ? { type } : {}
+  const result =  await collection.find(params).toArray();
 
   if (!result) {
-    return Response.json(error("type not found"), {
+    return Response.json(error("error"), {
       status: 404,
     })
   }
-  return Response.json(success({ type, data: result }), {
+  const res = type ? { type, data: result } : {
+    data: result,
+  }
+  return Response.json(success(res), {
     status: 200,
   });
 });

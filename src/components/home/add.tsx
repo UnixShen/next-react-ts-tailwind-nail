@@ -4,7 +4,8 @@ import { Button, Space } from "antd-mobile";
 import { useState, } from "react";
 
 import { ModalItem } from "./modal/modal";
-import { ADD_TYPE, ADD_TYPE_VALUE } from "./types";
+import { ADD_TYPE } from "./types";
+import { ADD_TYPE_VALUE } from "@/types";
 
 export const Add = () => {
     const [addType, setAddType] = useState<ADD_TYPE_VALUE>();

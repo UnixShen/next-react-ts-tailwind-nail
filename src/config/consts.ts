@@ -1,7 +1,7 @@
 export const BUSINESS_STATUS_CODE = {
-  ERROR: 0,
-  SUCCESS: 1,
-  WARNING: 2,
+  ERROR: 400,
+  SUCCESS: 200,
+  WARNING: 201,
 };
 
 export const DB_NAME = "nail";

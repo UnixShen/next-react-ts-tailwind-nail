@@ -1,5 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
+import { Toaster } from 'react-hot-toast';
+
 const inter = Inter({ subsets: ["latin"] });
 import Layout from "@/app/layout/page";
 import type { Metadata } from "next";
@@ -18,6 +20,7 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body className={inter.className}>
         <Layout >
+          <Toaster />
           {children}
         </Layout>
       </body>

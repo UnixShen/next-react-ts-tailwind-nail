@@ -1,10 +1,22 @@
-import { ShowData } from './const';
-
+import { useState, useEffect } from 'react';
+import { HomeDataItem } from '@/types';
+import { queryHomeList } from '@/service/api'
 export const Show = () => {
+    const [totalData, setTotalData] = useState<HomeDataItem[]>([]);
+    const handleGetData = async () => {
+        const res = await queryHomeList();
+        if (res.status === 200) {
+            setTotalData(res.data);
+        }
+    }
+
+    useEffect(() => {
+        handleGetData();
+    }, [])
     return (
         <div className="grid grid-cols-2 gap-4  h-[164px] mt-4">
             {
-                ShowData.map((item, index) => {
+                totalData.map((item, index) => {
                     return (
                         <div key={index} className="bg-pink-100 p-4 rounded-2xl shadow-soft">
                             <p className="text-sm text-gray-600">{item.title}:</p>

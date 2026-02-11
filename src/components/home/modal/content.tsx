@@ -1,7 +1,8 @@
 import { RefObject, useEffect } from 'react'
 import dayjs from "dayjs";
-import { Form, Input, Button, DatePicker, TextArea, Dialog, Radio, Space } from "antd-mobile";
-import { ADD_TYPE_VALUE, AddFormValues } from "../types";
+import { Form, Input, Button, DatePicker, TextArea, Radio, Space } from "antd-mobile";
+import toast from 'react-hot-toast';
+import { ADD_TYPE_VALUE, AddFormValues } from "@/types";
 import { AddTypeOptions } from "../const";
 import { DatePickerRef } from "antd-mobile/es/components/date-picker";
 import { addPost } from "@/service/api";
@@ -17,12 +18,11 @@ export const ModalContent = ({
 
     const onSubmit = async () => {
         const values = form.getFieldsValue()
-        console.log("🚀 ~ onSubmit ~ values:", values)
         const res = await addPost(values)
-        console.log("🚀 ~ onSubmit ~ res:", res)
-        if (res?.code === 200) {
+        if (res?.status === 200) {
             setShowModal(false)
             form.resetFields();
+            toast.success(res.message)
         }
     }
     const onClose = () => {
@@ -70,7 +70,7 @@ export const ModalContent = ({
                 </Form.Item>
                 {
                     addType === ADD_TYPE_VALUE.ADD_INSIGHT ?
-                        <Form.Item name='insight' label={<span className="text-gray-600">美甲小技巧</span>} required>
+                        <Form.Item name='content' label={<span className="text-gray-600">美甲小技巧</span>} required>
                             <TextArea
                                 placeholder='请输入心得小技巧'
                                 maxLength={100}
@@ -100,6 +100,14 @@ export const ModalContent = ({
                                 required
                             >
                                 <Input placeholder="请输入金额" type="number" className="rounded-lg bg-gray-50 p-3" pattern="^\d+(\.\d{1,2})?$" />
+                            </Form.Item>
+                            <Form.Item name='content' label={<span className="text-gray-600">备注</span>}>
+                                <TextArea
+                                    placeholder='备注'
+                                    maxLength={100}
+                                    rows={2}
+                                    showCount
+                                />
                             </Form.Item>
                         </>
                 }
