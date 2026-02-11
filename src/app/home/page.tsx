@@ -2,6 +2,8 @@
 
 import { NailHome } from  '@/components/home';
 
-export const Home = () => {
+const Home = () => {
     return <NailHome />
 };
+
+export default Home;
