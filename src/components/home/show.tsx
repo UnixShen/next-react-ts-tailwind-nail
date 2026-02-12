@@ -1,18 +1,17 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { HomeDataItem } from '@/types';
 import { queryHomeList } from '@/service/api'
 export const Show = () => {
     const [totalData, setTotalData] = useState<HomeDataItem[]>([]);
-
-    const handleGetData = useCallback(async () => {
-        const res = await queryHomeList();
-        if (res.status === 200) {
-            setTotalData(res.data);
-        }
-    }, [])
     useEffect(() => {
+        const handleGetData = async () => {
+            const res = await queryHomeList();
+            if (res.status === 200) {
+                setTotalData(res.data);
+            }
+        }
         handleGetData();
-    }, [handleGetData])
+    }, [])
     return (
         <div className="grid grid-cols-2 gap-4  h-[164px] mt-4">
             {
