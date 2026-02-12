@@ -1,9 +1,12 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   /* config options here */
   reactCompiler: true,
   transpilePackages: ['antd-mobile'],
+  images: {
+    unoptimized: true,
+  }
 };
+module.exports = nextConfig;
 
-export default nextConfig;

@@ -3,6 +3,8 @@ import { DB_NAME } from "@/config/consts";
 import { formatHomeData } from "./format";
 import { success } from "@/utils/apiResponse";
 
+export const runtime = 'edge';
+
 export const GET = async () => {
     const client = await clientPromise;
     const db = client.db(DB_NAME);

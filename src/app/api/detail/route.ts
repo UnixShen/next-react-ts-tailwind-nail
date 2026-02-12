@@ -4,6 +4,8 @@ import { NextRequest } from "next/server";
 import clientPromise from "@/lib/mongodb";
 import {DB_NAME} from "@/config/consts";
 
+export const runtime = 'edge';
+
 export const GET = withApiHandler(async (request: NextRequest) => {
   const type =  request.nextUrl.searchParams?.get("type");
   const client = await clientPromise;

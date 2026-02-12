@@ -4,6 +4,8 @@ import { success, error } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
 import { DB_NAME } from "@/config/consts";
 
+export const runtime = 'edge';
+
 export const DELETE = withApiHandler(async (req: NextRequest) => {
     const id = req.nextUrl.searchParams.get("id");
     if (!id) {

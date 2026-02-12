@@ -6,6 +6,8 @@ import clientPromise from "@/lib/mongodb";
 import { DB_NAME } from "@/config/consts";
 import { v4 as uuidv4 } from 'uuid';
 
+export const runtime = 'edge';
+
 export const POST = withApiHandler(async (request: NextRequest) => {
   const body = await request.json();
   const { type, amount, date, content } = body;
