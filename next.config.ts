@@ -27,8 +27,8 @@ const nextConfig = {
     serverActions: {
       // 允许的域名（替换为你的 Cloudflare Pages 域名，本地预览可加 localhost）
       allowedOrigins: [
-        "your-project-name.pages.dev", // 你的 Cloudflare 部署域名
-        "localhost:8788", // 本地预览域名（wrangler preview 端口）
+        "nail.fontend.dpdns.org", // 你的 Cloudflare 部署域名
+        "localhost:3000", // 本地预览域名（wrangler preview 端口）
       ],
       // 可选：启用 Server Actions 日志（调试用）
       logSerialization: true,
