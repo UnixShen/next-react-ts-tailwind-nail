@@ -13,7 +13,7 @@ export const withApiHandler = (
             const errorMessage =
                 typeof err === "object" && err !== null && "message" in err
                     ? (err as { message: string }).message
-                    : "Internal Server Error";
+                    : "Internal Server Error c";
             return Response.json(
                 error(errorMessage, defaultStatus),
                 { status: defaultStatus }
