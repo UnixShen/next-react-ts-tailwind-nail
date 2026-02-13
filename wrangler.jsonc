@@ -7,24 +7,28 @@
     "nodejs_compat",
     "global_fetch_strictly_public",
   ],
-  "account_id": "60902090209020902090209020902090",
+  "account_id": "354ea2782c11784024fb897b62cb2486",
   "assets": {
-    "directory": ".open-next/assets",
-    "binding": "ASSETS",
+    // "directory": ".open-next/assets",
+    // "binding": "ASSETS",
+    "directory": "./public"
   },
-  "services": [
-    {
-      "binding": "WORKER_SELF_REFERENCE",
-      "service": "next-react-ts-tailwind-nail",
-    },
-  ],
-  "r2_buckets": [
-    {
-      "binding": "NEXT_INC_CACHE_R2_BUCKET",
-      "bucket_name": "nail_bucket",
-    },
-  ],
+//   "services": [
+//     {
+//       "binding": "WORKER_SELF_REFERENCE",
+//       "service": "next-react-ts-tailwind-nail",
+//     },
+//   ],
+//   "r2_buckets": [
+//     {
+//       "binding": "NEXT_INC_CACHE_R2_BUCKET",
+//       "bucket_name": "nail_bucket",
+//     },
+//   ],
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://nail.fontend.dpdns.org/"
-  }
+  },
+	"observability": {
+		"enabled": true
+	}
 }
