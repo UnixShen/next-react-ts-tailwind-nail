@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "main": "src/app/layout.ts",
+  "main": "src/app/layout.tsx",
   "name": "nail",
   "compatibility_date": "2026-02-13",
   "compatibility_flags": [
@@ -29,6 +29,7 @@
     "NEXT_PUBLIC_SITE_URL": "https://nail.fontend.dpdns.org/"
   },
 	"observability": {
-		"enabled": true
+		"enabled": true,
+    "head_sampling_rate": 1
 	}
 }

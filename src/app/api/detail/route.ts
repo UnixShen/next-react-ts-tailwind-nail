@@ -5,6 +5,11 @@ import clientPromise from "@/lib/mongodb";
 import {DB_NAME} from "@/config/consts";
 
 export const GET = withApiHandler(async (request: NextRequest) => {
+    if (!request?.url) {
+        return Response.json(error("url is required"), {
+            status: 400,
+        })
+    }
   const type =  new URL(request.url).searchParams.get("type") || "";
   const client = await clientPromise;
   const db = client.db(DB_NAME);

@@ -6,11 +6,13 @@ import clientPromise from "@/lib/mongodb";
 import { DB_NAME } from "@/config/consts";
 import { v4 as uuidv4 } from 'uuid';
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL?.startsWith('http') 
-  ? process.env.NEXT_PUBLIC_API_URL 
-  : 'http://localhost:3000';
-
 export const POST = withApiHandler(async (request: NextRequest) => {
+  if (!request) {
+    return Response.json(
+        error("params data error, please check"),
+        { status: 400 }
+    )
+  }
   const body = await request.json() || {};
   const { type, amount, date, content } = body as { type: string, amount?: number, date?: string, content?: string };
   if (!type || (type === 'insight' && !content) || (type !== 'insight' && (!amount || !date))) {
