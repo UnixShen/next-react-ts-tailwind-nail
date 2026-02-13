@@ -7,8 +7,8 @@ import { DB_NAME } from "@/config/consts";
 import { v4 as uuidv4 } from 'uuid';
 
 export const POST = withApiHandler(async (request: NextRequest) => {
-  const body = await request.json();
-  const { type, amount, date, content } = body as { type: string, amount?: number, date?: string, content?: string };
+  const body = await request.json() || {};
+  const { type, amount, date, content } = body || {};
   if (!type || (type === 'insight' && !content) || (type !== 'insight' && (!amount || !date))) {
     return Response.json(
         error("params data error, please check"),
