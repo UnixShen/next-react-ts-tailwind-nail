@@ -5,7 +5,7 @@ import clientPromise from "@/lib/mongodb";
 import {DB_NAME} from "@/config/consts";
 
 export const GET = withApiHandler(async (request: NextRequest) => {
-  const type =  request.nextUrl.searchParams?.get("type");
+  const type =  request.nextUrl.searchParams?.get("type") as string;
   const client = await clientPromise;
   const db = client.db(DB_NAME);
   const collection = db.collection('nail_collection');

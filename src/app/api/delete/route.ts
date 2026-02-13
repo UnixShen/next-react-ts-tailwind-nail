@@ -5,7 +5,7 @@ import clientPromise from "@/lib/mongodb";
 import { DB_NAME } from "@/config/consts";
 
 export const DELETE = withApiHandler(async (req: NextRequest) => {
-    const id = req.nextUrl.searchParams.get("id");
+    const id = req.nextUrl.searchParams?.get("id") as string;
     if (!id) {
         return Response.json(error("id is required"), {
             status: 400,
