@@ -9,8 +9,7 @@ export const GET = withApiHandler(async (request: NextRequest) => {
   const client = await clientPromise;
   const db = client.db(DB_NAME);
   const collection = db.collection('nail_collection');
-  const params = type ? { type } : {}
-  const result =  await collection.find(params).toArray();
+  const result =  await collection.find({ type }).toArray();
 
   if (!result) {
     return Response.json(error("error"), {
