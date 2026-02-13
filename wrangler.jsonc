@@ -1,7 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "main": ".open-next/worker.js",
-  "name": "next-react-ts-tailwind-nail",
+  "name": "nail",
   "compatibility_date": "2026-02-13",
   "compatibility_flags": [
     "nodejs_compat",
