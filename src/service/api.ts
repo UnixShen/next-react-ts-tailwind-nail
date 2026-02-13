@@ -1,5 +1,16 @@
 import { AddFormValues, ADD_TYPE_VALUE } from "@/types";
 
+const isApiPath = (p?: string) => typeof p === 'string' && p.startsWith('/api');
+
+export function buildUrl(base?: string, path?: string) {
+  const safeBase = typeof base === 'string' ? base : '';
+  const safePath = typeof path === 'string' ? path : '';
+  if (isApiPath(safePath)) {
+    return `${safeBase}${safePath}`;
+  }
+  return `${safeBase}/${safePath}`.replace(/\/+/g, '/');
+}
+
 export const addPost = async (data: AddFormValues) => {
   const response = await fetch("/api/add", {
     method: "POST",
