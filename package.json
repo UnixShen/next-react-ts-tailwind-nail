@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "build-cf": "npx @opennextjs/cloudflare "
+    "build-cf": "npx run upload"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "^1.16.4",
