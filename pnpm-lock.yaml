@@ -17,6 +17,9 @@ importers:
       antd-mobile:
         specifier: ^5.42.3
         version: 5.42.3(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      antd-mobile-icons:
+        specifier: ^0.3.0
+        version: 0.3.0
       dayjs:
         specifier: ^1.11.19
         version: 1.11.19
