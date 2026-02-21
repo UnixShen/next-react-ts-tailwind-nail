@@ -1,6 +1,6 @@
 "use client";
 import toast from 'react-hot-toast';
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ADD_TYPE_VALUE, AddFormValues } from "@/types";
 import { getPosts, deletePost } from "@/service/api";
 
@@ -34,9 +34,8 @@ export const Reports = () => {
 
 
   useEffect(() => {
-    // eslint-disable-next-line
     handleSolve();
-  }, [])
+  }, [type])
 
   return <>
     <Space wrap className="p-4 bg-pink-100 rounded-2xl shadow-inner-soft flex justify-around items-center w-full mb-4">
@@ -46,7 +45,7 @@ export const Reports = () => {
       <Button block shape='rounded' size='middle'
         className={type === ADD_TYPE_VALUE.ADD_EXPENSE ? "text-pink-500 ring-2 ring-pink-400" : ""}
         onClick={() => setType(ADD_TYPE_VALUE.ADD_EXPENSE)}>
-        支出
+        退款
       </Button>
       <Button block shape='rounded' size='middle'
         className={type === ADD_TYPE_VALUE.ADD_INSIGHT ? "text-pink-500 ring-2 ring-pink-400" : ""}

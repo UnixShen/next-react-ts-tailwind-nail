@@ -12,6 +12,6 @@ export interface ModalItemProps extends Omit<ModalProps, 'visible' | 'onClose'> 
 
 export enum ADD_TYPE {
     ADD_INCOME = "新增业绩",
-    ADD_EXPENSE = "新增支出",
+    ADD_EXPENSE = "新增退款",
     ADD_INSIGHT = "今日心得",
 }
