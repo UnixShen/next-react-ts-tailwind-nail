@@ -4,7 +4,6 @@ import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
 initOpenNextCloudflareForDev();
 
 const nextConfig: NextConfig = {
-  reactCompiler: true,
   transpilePackages: ['antd-mobile'],
   images: {
     unoptimized: true,
