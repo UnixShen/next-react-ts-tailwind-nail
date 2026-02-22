@@ -6,6 +6,10 @@ export function buildUrl(base?: string, path?: string): string {
   const safeBase = base || '';
   const safePath = path || '';
 
+  if (typeof safePath !== 'string') {
+    console.error("safePath is not a string:", safePath);
+  }
+
   if (isApiPath(safePath)) {
     return `${safeBase}${safePath}`;
   }
