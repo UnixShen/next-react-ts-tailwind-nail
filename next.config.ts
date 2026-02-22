@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  // https://nextjs.org/docs/api-reference/next.config.js/rewrites
   typescript: {
     ignoreBuildErrors: true,
   },
