@@ -25,6 +25,7 @@
 //       "bucket_name": "nail_bucket",
 //     },
 //   ],
+//
   "vars": {
     "NEXT_PUBLIC_SITE_URL": "https://nail.fontend.dpdns.org/"
   },
