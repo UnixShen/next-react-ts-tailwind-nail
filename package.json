@@ -14,6 +14,7 @@
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "^1.16.5",
     "@tanstack/react-query": "^5.90.21",
     "antd-mobile": "^5.42.3",
     "antd-mobile-icons": "^0.3.0",
@@ -21,9 +22,9 @@
     "lightningcss": "^1.31.1",
     "lucide-react": "^0.563.0",
     "mongodb": "^7.1.0",
-    "next": "^16.1.6",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "15.5.10",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-hot-toast": "^2.6.0",
     "uuid": "^13.0.0",
     "wrangler": "^4.65.0"
@@ -39,18 +40,5 @@
     "next-transpile-modules": "^10.0.1",
     "tailwindcss": "^4",
     "typescript": "^5"
-  },
-  "description": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/UnixShen/next-react-ts-tailwind-nail.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/UnixShen/next-react-ts-tailwind-nail/issues"
-  },
-  "homepage": "https://github.com/UnixShen/next-react-ts-tailwind-nail#readme"
+  }
 }
