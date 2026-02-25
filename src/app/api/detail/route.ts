@@ -3,7 +3,6 @@ import { withApiHandler } from "@/utils/withApiHandler";
 import { error, success } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
 import {DB_NAME, COLLECTION_NAME} from "@/config/consts";
-export const runtime = 'nodejs';
 
 export const GET = withApiHandler(async (request: Request) => {
   try {

@@ -1,5 +1,4 @@
 // ...existing code...
-export const runtime = 'nodejs';
 import { withApiHandler } from "@/utils/withApiHandler";
 import { success, error } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
