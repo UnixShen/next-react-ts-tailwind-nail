@@ -3,6 +3,7 @@ import { withApiHandler } from "@/utils/withApiHandler";
 import { error, success } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
 import {DB_NAME, COLLECTION_NAME} from "@/config/consts";
+export const runtime = 'nodejs';
 
 export const GET = withApiHandler(async (request: Request) => {
   try {
@@ -15,7 +16,7 @@ export const GET = withApiHandler(async (request: Request) => {
     // 安全解析 type 参数（使用 base 避免相对 URL 抛错）
     let type = "";
     try {
-      const u = new URL(rawUrl, "http://localhost");
+      const u = new URL(rawUrl, '/');
       type = u.searchParams.get("type") ?? "";
     } catch (e) {
       type = "";

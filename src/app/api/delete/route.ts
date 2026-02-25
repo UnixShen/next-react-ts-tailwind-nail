@@ -1,4 +1,5 @@
 // ...existing code...
+export const runtime = 'nodejs';
 import { withApiHandler } from "@/utils/withApiHandler";
 import { success, error } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
@@ -17,7 +18,7 @@ export const DELETE = withApiHandler(async (req: Request) => {
     // 解析 id，优先使用 URL，解析失败则用正则兜底
     let id = "";
     try {
-      const u = new URL(rawUrl, "http://localhost");
+      const u = new URL(rawUrl,'/');
       id = u.searchParams?.get("id") ?? "";
     } catch (e) {
       const m = rawUrl.match(/[?&]id=([^&]+)/);

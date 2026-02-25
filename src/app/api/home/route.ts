@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import clientPromise from "@/lib/mongodb";
 import { DB_NAME, COLLECTION_NAME } from "@/config/consts";
 import { formatHomeData } from "./format";
