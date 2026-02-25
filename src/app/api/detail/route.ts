@@ -17,7 +17,7 @@ export const GET = withApiHandler(async (request: Request) => {
     try {
       const u = new URL(rawUrl, '/');
       type = u.searchParams.get("type") ?? "";
-    } catch (e) {
+    } catch (err: unknown) {
       type = "";
     }
 
@@ -35,7 +35,7 @@ export const GET = withApiHandler(async (request: Request) => {
 
     const res = type ? { type, data: result } : { data: result };
     return Response.json(success(res), { status: 200 });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error('API /api/detail handler error:', err);
     return Response.json(error('internal error'), { status: 500 });
   }

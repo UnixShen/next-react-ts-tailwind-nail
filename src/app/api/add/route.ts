@@ -20,7 +20,7 @@ export const POST = withApiHandler(async (request: Request) => {
       if (typeof (request as any).json === 'function') {
         body = await (request as any).json() || {};
       }
-    } catch (e) {
+    } catch (e: unknown) {
       body = {};
     }
 

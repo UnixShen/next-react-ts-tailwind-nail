@@ -19,7 +19,7 @@ export const DELETE = withApiHandler(async (req: Request) => {
     try {
       const u = new URL(rawUrl,'/');
       id = u.searchParams?.get("id") ?? "";
-    } catch (e) {
+    } catch (e: unknown) {
       const m = rawUrl.match(/[?&]id=([^&]+)/);
       id = m ? decodeURIComponent(m[1]) : "";
     }
@@ -43,7 +43,7 @@ export const DELETE = withApiHandler(async (req: Request) => {
       success(null, "Delete Success"),
       { status: 200 }
     );
-  } catch (err) {
+  } catch (err: unknown) {
     console.error('API /api/delete handler error:', err);
     return Response.json(error('internal error'), { status: 500 });
   }
