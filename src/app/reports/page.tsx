@@ -1,3 +1,4 @@
+import React from "react";
 import { Reports } from "@/components/reports";
 
 const Report = () => {

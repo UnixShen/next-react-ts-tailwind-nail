@@ -1,3 +1,5 @@
+import React from "react";
+
 const Customer = () => {
   return <div className="bg-[#FBDADD] p-4 rounded-2xl shadow-soft">
     <p className="text-sm text-gray-600 mb-2">客户管理</p>

@@ -1,14 +1,12 @@
 import React from 'react';
-import { InterList } from '@/types';
 import { queryHomeList } from '@/service/api';
 import { useQuery } from '@tanstack/react-query';
 
 export const Show = () => {
-    const { data, isLoading, error } = useQuery<InterList, Error>({
+    const { data, isLoading, error } = useQuery({
         queryKey: ['todos'],
         queryFn: queryHomeList
     });
-    console.log("🚀 ~ Show ~ data:", data)
 
     if (isLoading) {
         return <div className="text-center fs-14 pt-10">Loading...</div>;

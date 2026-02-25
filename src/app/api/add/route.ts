@@ -2,7 +2,7 @@
 import { withApiHandler } from "@/utils/withApiHandler";
 import { error, success } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
-import { DB_NAME } from "@/config/consts";
+import { DB_NAME, COLLECTION_NAME } from "@/config/consts";
 import { v4 as uuidv4 } from 'uuid';
 
 export const POST = withApiHandler(async (request: Request) => {
@@ -35,7 +35,7 @@ export const POST = withApiHandler(async (request: Request) => {
 
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const collection = db.collection("nail_collection");
+    const collection = db.collection(COLLECTION_NAME);
     const result = await collection.insertOne({
       type,
       amount,

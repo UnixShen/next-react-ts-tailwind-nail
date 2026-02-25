@@ -1,3 +1,4 @@
+import React from "react";
 import { Home, User } from "lucide-react";
 
 export const Footer = () => {

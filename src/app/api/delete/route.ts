@@ -2,7 +2,7 @@
 import { withApiHandler } from "@/utils/withApiHandler";
 import { success, error } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
-import { DB_NAME } from "@/config/consts";
+import { DB_NAME, COLLECTION_NAME } from "@/config/consts";
 
 export const DELETE = withApiHandler(async (req: Request) => {
   try {
@@ -32,7 +32,7 @@ export const DELETE = withApiHandler(async (req: Request) => {
 
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const collection = db.collection("nail_collection");
+    const collection = db.collection(COLLECTION_NAME);
     const res = await collection.deleteOne({ id });
     if (res.deletedCount === 0) {
       return Response.json(error("Delete Failed"), {

@@ -2,7 +2,7 @@
 import { withApiHandler } from "@/utils/withApiHandler";
 import { error, success } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
-import {DB_NAME} from "@/config/consts";
+import {DB_NAME, COLLECTION_NAME} from "@/config/consts";
 
 export const GET = withApiHandler(async (request: Request) => {
   try {
@@ -23,7 +23,7 @@ export const GET = withApiHandler(async (request: Request) => {
 
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const collection = db.collection('nail_collection');
+    const collection = db.collection(COLLECTION_NAME);
 
     // 如果 type 为空则查询全部
     const filter = typeof type === "string" && type ? { type } : {};

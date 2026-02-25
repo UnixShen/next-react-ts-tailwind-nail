@@ -1,12 +1,12 @@
 import clientPromise from "@/lib/mongodb";
-import { DB_NAME } from "@/config/consts";
+import { DB_NAME, COLLECTION_NAME } from "@/config/consts";
 import { formatHomeData } from "./format";
 import { success } from "@/utils/apiResponse";
 
 export const GET = async () => {
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const collection = db.collection('nail_collection');
+    const collection = db.collection(COLLECTION_NAME);
 
     const date = new Date().toISOString().slice(0, 10);
     const month = new Date().toISOString().slice(0, 7);
