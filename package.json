@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "eslint",
     "build-cf": "npx run upload",
-    "build": "npx vercel build",
+    "build": "next build",
     "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
     "deploy": "wrangler deploy",
     "upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
