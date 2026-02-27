@@ -36,17 +36,17 @@ export const DELETE = withApiHandler(async (req: Request) => {
     const collection = db.collection(COLLECTION_NAME);
     const res = await collection.deleteOne({ id });
     if (res.deletedCount === 0) {
-      return Response.json(error("Delete Failed"), {
+      return Response.json(error("删除失败，请检查 id 是否正确"), {
         status: 400,
       });
     }
     return Response.json(
-      success(null, "Delete Success"),
+      success(null, "删除成功"),
       { status: 200 }
     );
   } catch (err: unknown) {
     console.error('API /api/delete handler error:', err);
-    return Response.json(error('internal error'), { status: 500 });
+    return Response.json(error('删除失败，请检查'), { status: 500 });
   }
 })
 // ...existing code...

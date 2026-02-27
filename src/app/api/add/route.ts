@@ -44,11 +44,11 @@ export const POST = withApiHandler(async (request: Request) => {
       content,
       id: uuidv4(),
     });
-    return Response.json(success({ id: result.insertedId }), {
+    return Response.json(success({ id: result.insertedId }, '添加成功'), {
       status: 200,
     });
   } catch (err: unknown) {
     console.error('API /api/add handler error:', err);
-    return Response.json(error('internal error'), { status: 500 });
+    return Response.json(error('新增失败'), { status: 500 });
   }
 });

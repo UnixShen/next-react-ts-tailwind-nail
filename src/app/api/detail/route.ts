@@ -15,7 +15,7 @@ export const GET = withApiHandler(async (request: Request) => {
     // 安全解析 type 参数（使用 base 避免相对 URL 抛错）
     let type = "";
     try {
-      const u = new URL(rawUrl, '/');
+      const u = new URL(rawUrl);
       type = u.searchParams.get("type") ?? "";
     } catch (err: unknown) {
       console.log("🚀 ~ err:", err)

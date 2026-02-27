@@ -52,7 +52,7 @@ export const getPosts = async (type?: ADD_TYPE_VALUE): Promise<{
 }> => {
   try {
     const url = type ? buildUrl(undefined, `/api/detail?type=${type}`) : buildUrl(undefined, '/api/detail');
-    console.log("getPosts URL:", url); // 添加日志以调试 URL
+    console.log("getPosts URL:", url, type); // 添加日志以调试 URL
     const response = await fetch(url);
 
     if (!response.ok) {

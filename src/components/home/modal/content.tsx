@@ -26,6 +26,8 @@ export const ModalContent = ({
             setShowModal(false)
             form.resetFields();
             toast.success(res.message)
+        } else {
+            toast.error(res.message)
         }
     }
 
@@ -35,6 +37,9 @@ export const ModalContent = ({
           // 使其失效并重新获取
           queryClient.invalidateQueries({ queryKey: ['todos'] })
         },
+        onError: (error) => {
+          toast.error(error.message)
+          },
       })
     const onClose = () => {
         setShowModal(false)
