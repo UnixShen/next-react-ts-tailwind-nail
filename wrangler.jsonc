@@ -7,6 +7,18 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "workers_dev": true,
+  "preview_urls": true, 
+  // "routes": [
+  //   {
+  //      "pattern": "nail.fontend.dpdns.org",
+  //      "zone_name": "fontend.dpdns.org",
+  //      "custom_domain": true
+  //   }
+  // ],
+  // "vars": {
+  //   "MONGODB_URI": "mongodb+srv://captainfontend:l1J7eEJJeEEtTQMA@cluster0.qhrwsj7.mongodb.net/?appName=Cluster0"
+  // },
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
