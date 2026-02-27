@@ -18,7 +18,7 @@ export function buildUrl(base?: string, path?: string): string {
   return `${safeBase}/${safePath}`.replace(/\/+/g, '/');
 }
 
-export const addPost = async (data: AddFormValues): Promise<any> => {
+export const addPost = async (data: AddFormValues): Promise<unknown> => {
   try {
     const url = buildUrl(undefined, "/api/add");
     console.log("addPost URL:", url); // 添加日志以调试 URL

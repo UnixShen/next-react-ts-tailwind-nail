@@ -7,7 +7,7 @@ import {DB_NAME, COLLECTION_NAME} from "@/config/consts";
 export const GET = withApiHandler(async (request: Request) => {
   try {
     // 保护性读取 rawUrl，避免 undefined 导致 new URL 抛错
-    const rawUrl = typeof (request as any)?.url === "string" ? (request as any).url : "";
+    const rawUrl = typeof request?.url === "string" ? request.url : "";
     if (!rawUrl) {
       return Response.json(error("url is required"), { status: 400 });
     }
@@ -18,6 +18,7 @@ export const GET = withApiHandler(async (request: Request) => {
       const u = new URL(rawUrl, '/');
       type = u.searchParams.get("type") ?? "";
     } catch (err: unknown) {
+      console.log("🚀 ~ err:", err)
       type = "";
     }
 

@@ -14,7 +14,7 @@ export const Reports = () => {
   const handleSolve = useCallback(async () => {
     const res = await getPosts(type);
     if (res?.status === 200) {
-      setData(res?.data?.data || []);
+      setData(res?.data?.data || [])
     }
   }, [type])
 
@@ -34,8 +34,9 @@ export const Reports = () => {
 
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     handleSolve();
-  }, [type])
+  }, [type, handleSolve])
 
   return <>
     <Space wrap className="p-4 bg-pink-100 rounded-2xl shadow-inner-soft flex justify-around items-center w-full mb-4">

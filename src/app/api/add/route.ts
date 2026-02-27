@@ -15,12 +15,13 @@ export const POST = withApiHandler(async (request: Request) => {
     }
 
     // 安全解析 body（防止 request.json 抛错）
-    let body: any = {};
+    let body = {};
     try {
-      if (typeof (request as any).json === 'function') {
-        body = await (request as any).json() || {};
+      if (typeof (request).json === 'function') {
+        body = await (request).json() || {};
       }
     } catch (e: unknown) {
+      console.log("🚀 ~ e:", e)
       body = {};
     }
 
@@ -46,7 +47,7 @@ export const POST = withApiHandler(async (request: Request) => {
     return Response.json(success({ id: result.insertedId }), {
       status: 200,
     });
-  } catch (err) {
+  } catch (err: unknown) {
     console.error('API /api/add handler error:', err);
     return Response.json(error('internal error'), { status: 500 });
   }

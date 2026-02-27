@@ -7,7 +7,7 @@ import { DB_NAME, COLLECTION_NAME } from "@/config/consts";
 export const DELETE = withApiHandler(async (req: Request) => {
   try {
     // 保护性读取 URL（避免 undefined 或非字符串导致 new URL 抛错）
-    const rawUrl = typeof (req as any)?.url === "string" ? (req as any).url : "";
+    const rawUrl = typeof req?.url === "string" ? req.url : "";
     if (!rawUrl) {
       return Response.json(error("url is required"), {
         status: 400,
@@ -20,6 +20,7 @@ export const DELETE = withApiHandler(async (req: Request) => {
       const u = new URL(rawUrl,'/');
       id = u.searchParams?.get("id") ?? "";
     } catch (e: unknown) {
+      console.log("🚀 ~ e:", e)
       const m = rawUrl.match(/[?&]id=([^&]+)/);
       id = m ? decodeURIComponent(m[1]) : "";
     }
