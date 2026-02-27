@@ -29,7 +29,6 @@ export const Reports = () => {
 
   const handleEdit = (id?: number) => {
     if (!id) return;
-    // window.location.href = `/reports/edit?id=${id}`;
   }
 
 
