@@ -1,27 +1,52 @@
+// ...existing code...
 import { withApiHandler } from "@/utils/withApiHandler";
-import { NextRequest } from "next/server";
 import { success, error } from "@/utils/apiResponse";
 import clientPromise from "@/lib/mongodb";
-import { DB_NAME } from "@/config/consts";
+import { DB_NAME, COLLECTION_NAME } from "@/config/consts";
 
-export const DELETE = withApiHandler(async (req: NextRequest) => {
-    const id = req.nextUrl.searchParams.get("id");
-    if (!id) {
-        return Response.json(error("id is required"), {
-            status: 400,
-        })
+export const DELETE = withApiHandler(async (req: Request) => {
+  try {
+    // 保护性读取 URL（避免 undefined 或非字符串导致 new URL 抛错）
+    const rawUrl = typeof req?.url === "string" ? req.url : "";
+    if (!rawUrl) {
+      return Response.json(error("url is required"), {
+        status: 400,
+      });
     }
+
+    // 解析 id，优先使用 URL，解析失败则用正则兜底
+    let id = "";
+    try {
+      const u = new URL(rawUrl,'/');
+      id = u.searchParams?.get("id") ?? "";
+    } catch (e: unknown) {
+      console.log("🚀 ~ e:", e)
+      const m = rawUrl.match(/[?&]id=([^&]+)/);
+      id = m ? decodeURIComponent(m[1]) : "";
+    }
+
+    if (!id) {
+      return Response.json(error("id is required"), {
+        status: 400,
+      });
+    }
+
     const client = await clientPromise;
     const db = client.db(DB_NAME);
-    const collection = db.collection("nail_collection");
+    const collection = db.collection(COLLECTION_NAME);
     const res = await collection.deleteOne({ id });
     if (res.deletedCount === 0) {
-        return Response.json(error("Delete Failed"), {
-            status: 400,
-        })
+      return Response.json(error("删除失败，请检查 id 是否正确"), {
+        status: 400,
+      });
     }
     return Response.json(
-        success(null, "Delete Success"),
-        { status: 200 }
+      success(null, "删除成功"),
+      { status: 200 }
     );
+  } catch (err: unknown) {
+    console.error('API /api/delete handler error:', err);
+    return Response.json(error('删除失败，请检查'), { status: 500 });
+  }
 })
+// ...existing code...

@@ -1,7 +1,8 @@
-import { RefObject, useEffect } from 'react'
+import React, { RefObject, useEffect } from "react";
 import dayjs from "dayjs";
 import { Form, Input, Button, DatePicker, TextArea, Radio, Space } from "antd-mobile";
-import toast from 'react-hot-toast';
+import toast from "react-hot-toast";
+import { useQueryClient, useMutation } from "@tanstack/react-query";
 import { ADD_TYPE_VALUE, AddFormValues } from "@/types";
 import { AddTypeOptions } from "../const";
 import { DatePickerRef } from "antd-mobile/es/components/date-picker";
@@ -14,7 +15,9 @@ export const ModalContent = ({
     setShowModal: (showModal: boolean) => void;
     addType: ADD_TYPE_VALUE;
 }) => {
+    const queryClient = useQueryClient();
     const [form] = Form.useForm<AddFormValues>()
+
 
     const onSubmit = async () => {
         const values = form.getFieldsValue()
@@ -23,8 +26,21 @@ export const ModalContent = ({
             setShowModal(false)
             form.resetFields();
             toast.success(res.message)
+        } else {
+            toast.error(res.message)
         }
     }
+
+    const mutation = useMutation({
+        mutationFn: onSubmit,
+        onSuccess: () => {
+          // 使其失效并重新获取
+          queryClient.invalidateQueries({ queryKey: ['todos'] })
+        },
+        onError: (error) => {
+          toast.error(error.message)
+          },
+      })
     const onClose = () => {
         setShowModal(false)
         form.resetFields();
@@ -39,7 +55,7 @@ export const ModalContent = ({
             <Form
                 initialValues={{ type: addType }}
                 form={form}
-                onFinish={onSubmit}
+                onFinish={mutation.mutate}
                 layout="vertical"
                 className="space-y-4 text-sm"
                 footer={

@@ -6,7 +6,7 @@ export const AddTypeOptions = [
         value: ADD_TYPE_VALUE.ADD_INCOME,
     },
     {
-        label: '支出',
+        label: '退款',
         value: ADD_TYPE_VALUE.ADD_EXPENSE,
     },
     {

@@ -14,8 +14,18 @@ export interface AddFormValues {
     _id?: string;
 }
 
+export interface InterList {
+    data: HomeDataItem[];
+    total?: number;
+    status: string;
+    message: string;
+}
+
 export interface HomeDataItem {
     type: ADD_TYPE_VALUE;
     title: string;
     amount: number;
+    id?: number;
+    _id?: string;
+    date?: string;
 }

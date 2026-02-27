@@ -27,12 +27,12 @@ export const formatHomeData = (today: AddFormValues[], month: AddFormValues[]): 
         },
         {
             type: ADD_TYPE_VALUE.ADD_EXPENSE,
-            title: "今日支出",
+            title: "今日退款",
             amount: today.filter((item) => item.type === ADD_TYPE_VALUE.ADD_EXPENSE).reduce((acc, cur) => acc + (cur.amount || 0), 0),
         },
         {
             type: ADD_TYPE_VALUE.ADD_EXPENSE,
-            title: "本月总支出",
+            title: "本月总退款",
             amount: month.filter((item) => item.type === ADD_TYPE_VALUE.ADD_EXPENSE).reduce((acc, cur) => acc + (cur.amount || 0), 0),
         },
 

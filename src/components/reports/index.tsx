@@ -1,55 +1,55 @@
 "use client";
 import toast from 'react-hot-toast';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { ADD_TYPE_VALUE, AddFormValues } from "@/types";
 import { getPosts, deletePost } from "@/service/api";
 
-import { List, Space, Button, Toast } from 'antd-mobile';
+import { List, Space, Button } from 'antd-mobile';
 import { BillOutline, UserOutline } from 'antd-mobile-icons';
 
 export const Reports = () => {
   const [type, setType] = useState<ADD_TYPE_VALUE>(ADD_TYPE_VALUE.ADD_INCOME);
   const [data, setData] = useState<AddFormValues[]>([]);
 
-  const handleSolve = async (type: ADD_TYPE_VALUE) => {
-    setType(type);
+  const handleSolve = useCallback(async () => {
     const res = await getPosts(type);
     if (res?.status === 200) {
-      setData(res?.data?.data || []);
+      setData(res?.data?.data || [])
     }
-  }
+  }, [type])
 
   const handleDelete = async (id?: number) => {
     if (!id) return;
     const res = await deletePost(id);
     if (res?.status === 200) {
-      handleSolve(type);
+      handleSolve();
       toast.success(res.message);
     }
   };
 
   const handleEdit = (id?: number) => {
     if (!id) return;
-    // window.location.href = `/reports/edit?id=${id}`;
   }
 
+
   useEffect(() => {
-    handleSolve(type);
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    handleSolve();
+  }, [type, handleSolve])
 
   return <>
     <Space wrap className="p-4 bg-pink-100 rounded-2xl shadow-inner-soft flex justify-around items-center w-full mb-4">
       <Button block shape='rounded' size='middle'
-        className={type === ADD_TYPE_VALUE.ADD_INCOME ? "text-pink-500 ring-2 ring-pink-400" : ""} onClick={() => handleSolve(ADD_TYPE_VALUE.ADD_INCOME)}>业绩
+        className={type === ADD_TYPE_VALUE.ADD_INCOME ? "text-pink-500 ring-2 ring-pink-400" : ""} onClick={() => setType(ADD_TYPE_VALUE.ADD_INCOME)}>业绩
       </Button>
       <Button block shape='rounded' size='middle'
         className={type === ADD_TYPE_VALUE.ADD_EXPENSE ? "text-pink-500 ring-2 ring-pink-400" : ""}
-        onClick={() => handleSolve(ADD_TYPE_VALUE.ADD_EXPENSE)}>
-        支出
+        onClick={() => setType(ADD_TYPE_VALUE.ADD_EXPENSE)}>
+        退款
       </Button>
       <Button block shape='rounded' size='middle'
         className={type === ADD_TYPE_VALUE.ADD_INSIGHT ? "text-pink-500 ring-2 ring-pink-400" : ""}
-        onClick={() => handleSolve(ADD_TYPE_VALUE.ADD_INSIGHT)}>
+        onClick={() => setType(ADD_TYPE_VALUE.ADD_INSIGHT)}>
         心得
       </Button>
     </Space>
@@ -83,12 +83,12 @@ export const Reports = () => {
               }
             >
               <Space direction='vertical'>
-                { type !== ADD_TYPE_VALUE.ADD_INSIGHT ?
+                {type !== ADD_TYPE_VALUE.ADD_INSIGHT ?
                   <>
                     <div>日期：{item.date}</div>
                     <div>金额：{item.amount}</div>
                     <span>备注：{item.content ?? '无'}</span>
-                  </> : 
+                  </> :
                   <span>心得：{item.content ?? '无'}</span>
                 }
               </Space>

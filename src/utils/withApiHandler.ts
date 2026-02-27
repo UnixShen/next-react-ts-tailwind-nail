@@ -1,20 +1,15 @@
 
-import { NextRequest } from "next/server";
-import { error } from "@/utils/apiResponse";
-import { BUSINESS_STATUS_CODE } from "@/config/consts";
-
-export const withApiHandler = (
-    handler: (request: NextRequest) => Promise<Response>,
-    defaultStatus = BUSINESS_STATUS_CODE.ERROR) => {
-    return async (request: NextRequest) => {
-        try {
-            return await handler(request);
-        } catch (err: any) {
-            console.error(err);
-            return Response.json(
-                error(err.message || "Internal Server Error", defaultStatus),
-                { status: defaultStatus }
-            );
-        }
-    };
-};
+export function withApiHandler(handler: (req: Request) => Promise<Response>) {
+  return async (req: Request) => {
+    try {
+      const resp = await handler(req);
+      return resp;
+    } catch (err: unknown) {
+      console.error('withApiHandler caught error:', err);
+      return new Response(JSON.stringify({ error: 'internal error' }), {
+        status: 500,
+        headers: { 'content-type': 'application/json' },
+      });
+    }
+  };
+}
